@@ -1,0 +1,33 @@
+<h1>Create API Key</h1>
+
+<% username = current_user.email.split("@").first.gsub(/[^a-z0-9]/i, "").downcase %>
+<% today = Date.current.strftime("%Y%m%d") %>
+
+<%= form_with model: @api_key, url: api_keys_path do |f| %>
+  <div style="font-family: monospace; font-size: 1.2rem; margin: 1rem 0;">
+    auth!<%= username %>@<%= f.text_field :project, 
+      required: true, 
+      placeholder: "project", 
+      pattern: "[a-zA-Z0-9\\-]+",
+      title: "Only letters, numbers, and dashes",
+      style: "font-family: monospace; width: 120px; border: none; border-bottom: 2px solid #333; background: transparent;",
+      oninput: "this.value = this.value.replace(/[^a-zA-Z0-9\\-]/g, ''); this.style.width = ((this.value.length || 7) + 2) + 'ch'" 
+    %>_<%= today %>.xxxxxxxxxxxx
+  </div>
+
+  <fieldset>
+    <legend>Scopes</legend>
+    <% ApiKey::SCOPES.each do |scope| %>
+      <label>
+        <%= check_box_tag "api_key[scopes][]", scope %>
+        <%= scope %>
+      </label><br>
+    <% end %>
+  </fieldset>
+
+  <div style="margin-top: 1rem;">
+    <%= f.submit "Create Key" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", api_keys_path %>

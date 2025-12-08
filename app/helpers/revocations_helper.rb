@@ -1,0 +1,2 @@
+module RevocationsHelper
+end

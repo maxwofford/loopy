@@ -1,0 +1,39 @@
+<h1>API Keys</h1>
+
+<%= link_to "Create new key", new_api_key_path %>
+
+<% if flash[:raw_key] %>
+  <div style="background: #fffbe6; padding: 1rem; margin: 1rem 0; border: 1px solid #ffe066;">
+    <strong>Save this key now — you won't see it again:</strong>
+    <code style="display: block; margin-top: 0.5rem; word-break: break-all;"><%= flash[:raw_key] %></code>
+  </div>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Scopes</th>
+      <th>Created</th>
+      <th>Last Used</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @api_keys.each do |key| %>
+      <tr>
+        <td><%= link_to key.project, api_key_path(key) %></td>
+        <td><%= key.scopes.join(", ") %></td>
+        <td><%= key.created_at.strftime("%Y-%m-%d") %></td>
+        <td><%= key.last_used_at&.strftime("%Y-%m-%d %H:%M") || "Never" %></td>
+        <td><%= key.revoked? ? "Revoked" : "Active" %></td>
+        <td>
+          <% unless key.revoked? %>
+            <%= button_to "Revoke", api_key_path(key), method: :delete, data: { turbo_confirm: "Are you sure you want to revoke this key?" } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

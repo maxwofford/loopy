@@ -1,0 +1,10 @@
+Your Loopy API key for '<%= @api_key.project %>' has been revoked.
+
+This key was revoked via the public revocation page. If you did not revoke this key, it may have been leaked and found by a security researcher.
+
+Key details:
+- Project: <%= @api_key.project %>
+- Created: <%= @api_key.created_at.strftime("%Y-%m-%d") %>
+- Revoked: <%= @api_key.revoked_at.strftime("%Y-%m-%d %H:%M UTC") %>
+
+If you need a new API key, please sign in to Loopy and create one.

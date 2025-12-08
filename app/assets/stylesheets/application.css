@@ -1,0 +1,30 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+
+:root {
+  color-scheme: light dark;
+}
+
+.flash {
+  padding: 0.5rem 1rem;
+  border: 1px solid;
+  color: light-dark(black, white);
+}
+
+.flash-notice {
+  background-color: light-dark(#33d6a6, #2a9d7e);
+  border-color: light-dark(#28b893, #33d6a6);
+}
+
+.flash-alert {
+  background-color: light-dark(#ec3750, #c42d43);
+  border-color: light-dark(#d32f45, #ec3750);
+}

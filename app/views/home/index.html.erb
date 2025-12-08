@@ -1,0 +1,12 @@
+<h1>Loopy</h1>
+
+<% if signed_in? %>
+  <p>Signed in as <%= current_user.email %></p>
+  <p><%= link_to "Manage API Keys", api_keys_path %></p>
+  <%= button_to "Sign out", session_path, method: :delete %>
+<% else %>
+  <%= link_to "Sign in with HCA", new_session_path %>
+<% end %>
+
+<hr>
+<p><%= link_to "Found a leaked API key? Revoke it here.", new_revocation_path %></p>

@@ -1,0 +1,38 @@
+<h1>API Key: <%= @api_key.project %></h1>
+
+<p>
+  <strong>Status:</strong> <%= @api_key.revoked? ? "Revoked" : "Active" %><br>
+  <strong>Scopes:</strong> <%= @api_key.scopes.join(", ") %><br>
+  <strong>Created:</strong> <%= @api_key.created_at.strftime("%Y-%m-%d %H:%M") %>
+</p>
+
+<%= link_to "← Back to API Keys", api_keys_path %>
+
+<h2>Request Log</h2>
+
+<% if @api_requests.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Endpoint</th>
+        <th>Status</th>
+        <th>IP</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @api_requests.each do |req| %>
+        <tr>
+          <td><%= req.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+          <td><%= req.endpoint %></td>
+          <td><%= req.response_status %></td>
+          <td><%= req.ip_address %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @api_requests %>
+<% else %>
+  <p>No requests logged yet.</p>
+<% end %>

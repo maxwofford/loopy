@@ -1,0 +1,14 @@
+<h1>Revoke a Leaked API Key</h1>
+
+<p>If you've found a leaked Loopy API key, paste it below to revoke it immediately. The key owner will be notified.</p>
+
+<%= form_with url: revocation_path, method: :post do |f| %>
+  <div>
+    <%= f.label :key, "API Key" %>
+    <%= f.text_field :key, value: @key, required: true, placeholder: "auth!user@project_20251207.xxxxx", style: "width: 100%; font-family: monospace;" %>
+  </div>
+
+  <div style="margin-top: 1rem;">
+    <%= f.submit "Revoke Key" %>
+  </div>
+<% end %>
