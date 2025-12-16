@@ -1,17 +1,21 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  api_key: one
-  endpoint: MyString
-  request_body: 
-  response_status: 1
-  ip_address: MyString
-  fingerprint: 
+  api_key: active_key
+  endpoint: /api/v1/transactional
+  request_body:
+    transactionalId: test-id
+    email: test@example.com
+  response_status: 200
+  ip_address: 127.0.0.1
+  fingerprint:
+    user_agent: TestAgent/1.0
 
 two:
-  api_key: two
-  endpoint: MyString
-  request_body: 
-  response_status: 1
-  ip_address: MyString
-  fingerprint: 
+  api_key: active_key
+  endpoint: /api/v1/transactional
+  request_body:
+    transactionalId: test-id-2
+    email: test2@example.com
+  response_status: 400
+  ip_address: 192.168.1.1
+  fingerprint:
+    user_agent: TestAgent/2.0

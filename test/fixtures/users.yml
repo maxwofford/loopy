@@ -1,9 +1,7 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  hca_id: MyString
-  email: MyString
+  hca_id: user-one-hca-id
+  email: user-one@example.com
 
 two:
-  hca_id: MyString
-  email: MyString
+  hca_id: user-two-hca-id
+  email: user-two@example.com

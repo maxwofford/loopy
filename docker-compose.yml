@@ -1,0 +1,44 @@
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      - RAILS_ENV=production
+      - RAILS_MASTER_KEY
+      - DATABASE_URL
+      - LOOPS_API_KEY
+    depends_on:
+      - db
+
+  smtp:
+    build: .
+    command: ./bin/smtp_server
+    ports:
+      - "587:587"
+      - "8080:8080"
+    environment:
+      - RAILS_ENV=production
+      - RAILS_MASTER_KEY
+      - DATABASE_URL
+      - LOOPS_API_KEY
+      - SMTP_DOMAIN
+      - SMTP_PORT=587
+      - CERTBOT_EMAIL
+    volumes:
+      - letsencrypt:/etc/letsencrypt
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    environment:
+      - POSTGRES_PASSWORD
+      - POSTGRES_USER=loopy
+      - POSTGRES_DB=loopy_production
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  letsencrypt:
+  postgres_data:

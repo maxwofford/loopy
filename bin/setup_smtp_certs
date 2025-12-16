@@ -1,0 +1,34 @@
+#!/bin/bash
+set -e
+
+DOMAIN=${SMTP_DOMAIN:-smtp.loopy.hackclub.com}
+CERT_PATH="/etc/letsencrypt/live/$DOMAIN"
+EMAIL=${CERTBOT_EMAIL:-admin@hackclub.com}
+
+if [ -f "$CERT_PATH/fullchain.pem" ] && [ -f "$CERT_PATH/privkey.pem" ]; then
+  echo "Certs already exist for $DOMAIN"
+  
+  # Check if renewal needed (within 30 days of expiry)
+  if openssl x509 -checkend 2592000 -noout -in "$CERT_PATH/fullchain.pem" 2>/dev/null; then
+    echo "Certs are still valid"
+  else
+    echo "Renewing certs..."
+    certbot renew --quiet
+  fi
+else
+  echo "Obtaining certs for $DOMAIN..."
+  certbot certonly \
+    --standalone \
+    --non-interactive \
+    --agree-tos \
+    --email "$EMAIL" \
+    --domain "$DOMAIN" \
+    --http-01-port 8080
+fi
+
+# Export paths for SMTP server
+export SMTP_TLS_CERT="$CERT_PATH/fullchain.pem"
+export SMTP_TLS_KEY="$CERT_PATH/privkey.pem"
+
+echo "SMTP_TLS_CERT=$SMTP_TLS_CERT"
+echo "SMTP_TLS_KEY=$SMTP_TLS_KEY"

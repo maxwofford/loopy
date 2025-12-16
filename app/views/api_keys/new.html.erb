@@ -25,6 +25,14 @@
     <% end %>
   </fieldset>
 
+  <fieldset>
+    <legend>Logging</legend>
+    <label>
+      <%= check_box_tag "api_key[log_request_body]", "1", true %>
+      Log request bodies
+    </label>
+  </fieldset>
+
   <div style="margin-top: 1rem;">
     <%= f.submit "Create Key" %>
   </div>

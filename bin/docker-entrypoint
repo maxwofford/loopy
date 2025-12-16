@@ -5,4 +5,9 @@ if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
   ./bin/rails db:prepare
 fi
 
+# If running the SMTP server with a domain configured, setup TLS certs
+if [ "${1}" == "./bin/smtp_server" ] && [ -n "$SMTP_DOMAIN" ]; then
+  source ./bin/setup_smtp_certs
+fi
+
 exec "${@}"

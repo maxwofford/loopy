@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_07_203813) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_11_043637) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "api_keys", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "key_hash", null: false
+    t.boolean "log_request_body", default: true, null: false
     t.string "project", null: false
     t.datetime "revoked_at"
     t.string "scopes", default: [], null: false, array: true

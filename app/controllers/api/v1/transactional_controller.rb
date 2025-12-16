@@ -7,7 +7,7 @@ class Api::V1::TransactionalController < Api::V1::BaseController
     ApiRequest.create!(
       api_key: @api_key,
       endpoint: "/api/v1/transactional",
-      request_body: filtered_request_body,
+      request_body: @api_key.log_request_body? ? filtered_request_body : {},
       response_status: loops_response.status,
       ip_address: client_ip,
       fingerprint: request_fingerprint

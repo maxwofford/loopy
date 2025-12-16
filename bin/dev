@@ -1,2 +1,14 @@
 #!/usr/bin/env ruby
-exec "./bin/rails", "server", *ARGV
+
+if ENV["OVERMIND_SOCKET"]
+  exec "./bin/rails", "server", *ARGV
+elsif system("command -v overmind > /dev/null")
+  exec "overmind", "start", "-f", "Procfile.dev", "--no-port"
+elsif system("command -v foreman > /dev/null")
+  exec "foreman", "start", "-f", "Procfile.dev"
+else
+  puts "Install overmind or foreman to run all processes, or run separately:"
+  puts "  bin/rails server"
+  puts "  bin/smtp_server"
+  exec "./bin/rails", "server", *ARGV
+end

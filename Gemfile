@@ -43,6 +43,9 @@ gem "openid_connect"
 # HTTP client for proxying requests
 gem "faraday"
 
+# SMTP relay server
+gem "midi-smtp-server"
+
 # Pagination
 gem "kaminari"
 
@@ -75,4 +78,8 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+
+  # Record and replay HTTP interactions
+  gem "vcr"
+  gem "webmock"
 end

@@ -1,0 +1,76 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://app.loops.so/api/v1/transactional
+    body:
+      encoding: ASCII-8BIT
+      string: '{"transactionalId":"cmiw99wj70qkx330ixxs0olyr","email":"test@example.com"}'
+    headers:
+      User-Agent:
+      - Faraday v2.14.0
+      Authorization:
+      - Bearer <LOOPS_API_KEY>
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Date:
+      - Tue, 16 Dec 2025 17:54:28 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '209'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Headers:
+      - X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,
+        Content-Type, Date, X-Api-Version
+      X-Robots-Tag:
+      - none
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Permissions-Policy:
+      - accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(),
+        cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(),
+        execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=(),
+        geolocation=(), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(),
+        midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(),
+        screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=()
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Ratelimit-Limit:
+      - '20'
+      X-Ratelimit-Remaining:
+      - '19'
+      Etag:
+      - '"3bcjwwv8z5t"'
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 9af00bcf3ed475b1-EWR
+    body:
+      encoding: UTF-8
+      string: '{"success":false,"message":"Missing ''dataVariables'' object.","error":{"path":"dataVariables","message":"Missing
+        required fields: test_key"},"path":"dataVariables","transactionalId":"cmiw99wj70qkx330ixxs0olyr"}'
+  recorded_at: Tue, 16 Dec 2025 17:54:28 GMT
+recorded_with: VCR 6.3.1

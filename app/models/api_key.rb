@@ -9,7 +9,7 @@ class ApiKey < ApplicationRecord
 
   SCOPES = %w[transactional:send].freeze
 
-  def self.generate(user:, project:, scopes: [])
+  def self.generate(user:, project:, scopes: [], log_request_body: true)
     secret = SecureRandom.hex(16)
     date = Date.current.strftime("%Y%m%d")
     username = user.email.split("@").first.gsub(/[^a-z0-9]/i, "").downcase
@@ -20,7 +20,8 @@ class ApiKey < ApplicationRecord
       user: user,
       project: project,
       scopes: scopes & SCOPES,
-      key_hash: Digest::SHA256.hexdigest(raw_key)
+      key_hash: Digest::SHA256.hexdigest(raw_key),
+      log_request_body: log_request_body
     )
     api_key.raw_key = raw_key
     api_key

@@ -18,7 +18,8 @@ class ApiKeysController < ApplicationController
     @api_key = ApiKey.generate(
       user: current_user,
       project: params[:api_key][:project],
-      scopes: Array(params[:api_key][:scopes]).reject(&:blank?)
+      scopes: Array(params[:api_key][:scopes]).reject(&:blank?),
+      log_request_body: params[:api_key][:log_request_body] == "1"
     )
     flash[:notice] = "API key created: #{@api_key.raw_key}. Copy this because you won't see it again!"
     redirect_to api_keys_path
