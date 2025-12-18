@@ -1,8 +1,10 @@
+# NOTE: When deploying to Coolify, ports other than 80/443 need to be
+# explicitly exposed in Coolify's "Ports Exposes" setting (not via HTTP proxy).
+# For SMTP, add 587:587 as a direct TCP port mapping.
+
 services:
   web:
     build: .
-    ports:
-      - "80:80"
     environment:
       - RAILS_ENV=production
       - RAILS_MASTER_KEY
