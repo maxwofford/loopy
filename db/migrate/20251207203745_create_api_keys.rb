@@ -11,6 +11,6 @@ class CreateApiKeys < ActiveRecord::Migration[8.1]
     end
 
     add_index :api_keys, :key_hash, unique: true
-    add_index :api_keys, [:user_id, :project]
+    add_index :api_keys, [ :user_id, :project ]
   end
 end

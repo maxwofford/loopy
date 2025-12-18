@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   root "home#index"
 
-  resources :api_keys, only: [:index, :new, :create, :show, :destroy]
+  resources :api_keys, only: [ :index, :new, :create, :show, :destroy ]
 
   namespace :api do
     namespace :v1 do
@@ -19,9 +19,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :revocation, only: [:new, :create]
+  resource :revocation, only: [ :new, :create ]
 
-  resource :session, only: [:new, :destroy] do
+  resource :session, only: [ :new, :destroy ] do
     get :callback, on: :collection
   end
 end
