@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+$stdout.sync = true
+$stderr.sync = true
+
 require_relative "../config/environment"
 
 port = ENV.fetch("SMTP_PORT", 587).to_i
@@ -6,10 +9,11 @@ host = ENV.fetch("SMTP_HOST", "0.0.0.0")
 tls_cert = ENV["SMTP_TLS_CERT"]
 tls_key = ENV["SMTP_TLS_KEY"]
 
+puts "[#{Time.now}] Loopy SMTP server starting..."
 if tls_cert && tls_key
-  puts "Starting Loopy SMTP server on #{host}:#{port} with STARTTLS..."
+  puts "[#{Time.now}] Starting on #{host}:#{port} with STARTTLS..."
 else
-  puts "Starting Loopy SMTP server on #{host}:#{port} (no TLS)..."
+  puts "[#{Time.now}] Starting on #{host}:#{port} (no TLS)..."
 end
 
 server = LoopySmtpServer.new(port: port, host: host, tls_cert: tls_cert, tls_key: tls_key)
@@ -18,4 +22,5 @@ trap("INT") { server.stop }
 trap("TERM") { server.stop }
 
 server.start
+puts "[#{Time.now}] SMTP server is now listening on #{host}:#{port}"
 server.join

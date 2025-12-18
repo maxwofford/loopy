@@ -17,7 +17,7 @@ class LoopySmtpServer < MidiSmtpServer::Smtpd
       hosts: host,
       max_processings: 4,
       auth_mode: :AUTH_REQUIRED,
-      logger_severity: Logger::WARN,
+      logger_severity: Logger::INFO,
       **tls_opts
     )
   end
