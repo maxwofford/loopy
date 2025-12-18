@@ -19,7 +19,7 @@ class Rack::Attack
     [
       429,
       { "Content-Type" => "application/json" },
-      [{ error: "Rate limit exceeded. Max #{RateLimiter::MAX_REQUESTS} request per second." }.to_json]
+      [ { error: "Rate limit exceeded. Max #{RateLimiter::MAX_REQUESTS} request per second." }.to_json ]
     ]
   end
 

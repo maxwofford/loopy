@@ -38,5 +38,4 @@ class Api::V1::BaseController < ActionController::API
       cf_country: request.headers["CF-IPCountry"]
     }.compact
   end
-
 end
