@@ -1,4 +1,5 @@
 ENV["RAILS_ENV"] ||= "test"
+ENV["LOOPS_API_KEY"] ||= "test_loops_api_key"
 require_relative "../config/environment"
 require "rails/test_help"
 require_relative "support/vcr_setup"
