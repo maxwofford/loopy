@@ -5,6 +5,8 @@ class ApiKey < ApplicationRecord
   validates :project, presence: true, format: { with: /\A[a-z0-9\-]+\z/i, message: "only allows letters, numbers, and dashes" }
   validates :key_hash, presence: true, uniqueness: true
 
+  scope :active, -> { where(revoked_at: nil) }
+
   attr_accessor :raw_key
 
   SCOPES = %w[transactional:send].freeze

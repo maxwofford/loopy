@@ -24,6 +24,7 @@ class LoopySmtpServer < MidiSmtpServer::Smtpd
 
   def on_auth_event(ctx, authorization_id, authentication_id, authentication)
     @current_team_id = authentication_id
+    @current_raw_key = authentication
     @current_api_key = authenticate_loopy_key(authentication)
 
     if @current_api_key.nil?
@@ -42,6 +43,8 @@ class LoopySmtpServer < MidiSmtpServer::Smtpd
   end
 
   def on_message_data_event(ctx)
+    check_rate_limit!(@current_raw_key)
+
     envelope_from = ctx[:envelope][:from]
     envelope_to = ctx[:envelope][:to]
     message_data = ctx[:message][:data]
@@ -95,5 +98,11 @@ class LoopySmtpServer < MidiSmtpServer::Smtpd
       ip_address: "127.0.0.1",
       fingerprint: { source: "smtp", team_id: @current_team_id }
     )
+  end
+
+  def check_rate_limit!(raw_key)
+    RateLimiter.check!(raw_key)
+  rescue RateLimiter::LimitExceeded => e
+    raise MidiSmtpServer::Smtpd450Exception, "450 #{e.message}"
   end
 end

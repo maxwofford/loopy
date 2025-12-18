@@ -49,6 +49,9 @@ gem "midi-smtp-server"
 # Pagination
 gem "kaminari"
 
+# Rate limiting middleware
+gem "rack-attack"
+
 # AWS SES for revocation emails
 gem "aws-sdk-rails"
 
