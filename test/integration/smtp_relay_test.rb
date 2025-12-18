@@ -7,6 +7,7 @@ class SmtpRelayTest < ActiveSupport::TestCase
     @raw_key = "auth!userone@test-project_20251216.testsecret123"
     @team_id = ENV.fetch("LOOPS_TEAM_ID", "test-team-id")
     @smtp_port = 2525 + rand(1000)
+    RateLimiter.reset!
   end
 
   teardown do
