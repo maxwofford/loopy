@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+$stdout.sync = true
+$stderr.sync = true
+
+echo "[$(date)] Starting Loopy services..."
+
+# Start SMTP server in background
+./bin/smtp_server &
+SMTP_PID=$!
+
+# Start web server (foreground)
+echo "[$(date)] Starting web server..."
+exec ./bin/thrust ./bin/rails server

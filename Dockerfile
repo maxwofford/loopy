@@ -76,4 +76,4 @@ VOLUME /etc/letsencrypt
 
 # Web on 80, SMTP on 587, certbot challenge on 8080
 EXPOSE 80 587 8080
-CMD ["./bin/thrust", "./bin/rails", "server"]
+CMD ["./bin/start"]
