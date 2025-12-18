@@ -4,6 +4,7 @@ class Api::V1::TransactionalControllerTest < ActionDispatch::IntegrationTest
   setup do
     @api_key = api_keys(:active_key)
     @raw_key = "auth!userone@test-project_20251216.testsecret123"
+    RateLimiter.reset!
   end
 
   test "proxies request to loops.so and returns success" do

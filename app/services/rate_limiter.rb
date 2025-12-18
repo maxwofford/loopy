@@ -7,6 +7,10 @@ class RateLimiter
   @@requests = Hash.new { |h, k| h[k] = [] }
   @@mutex = Mutex.new
 
+  def self.reset!
+    @@mutex.synchronize { @@requests.clear }
+  end
+
   def self.check!(key)
     return if key.blank?
 
