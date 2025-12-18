@@ -1,5 +1,6 @@
 class ApiKeysController < ApplicationController
   before_action :require_auth
+  before_action :require_can_create_keys, only: [ :new, :create ]
 
   def index
     @api_keys = current_user.api_keys.order(created_at: :desc)
@@ -30,5 +31,13 @@ class ApiKeysController < ApplicationController
     api_key.revoke!
     flash[:notice] = "API key revoked for '#{api_key.project}'"
     redirect_to api_keys_path
+  end
+
+  private
+
+  def require_can_create_keys
+    unless current_user.can_create_keys?
+      redirect_to api_keys_path, alert: "You don't have permission to create API keys"
+    end
   end
 end
